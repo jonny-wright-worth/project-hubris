@@ -35,3 +35,20 @@ What makes this more defensible IMO is that Nx isn't just a javscript/typescript
 ## Starting with some good practices
 
 There are some things that I want to get right from the start that are not related to any piece of code, but more to how the repo is setup.
+
+### Conventional Commits
+
+Conventional commits is a framework on how to structure a git commit message. It has the structure `<type>[optional scope]: <description>` (e.g. `fix(core): ensure that Foos always set the Bars correctly`). It has a few benefits:
+
+1. It makes it simpler to scan the commit history. Every commit will have a lead description of whether is is a feature, a fix, a test, documentation, etc, so scanning down the list of the commits it is easy to see what type of commit it is
+   - The bonus is that it helps us to make each commit atomic. Say you make some changes to a feature and in the process realise that some of the documentation is not up to date - and so update it. What do you write in the conventional commit? It is both a documentation and a feature commit. The difficulty in finding the right conventional commit helps us to realise that we should be making these as two separate commits. If there is a problem with the feature changes - say it includes a bug or regression - then we don't want to revert the documentation changes if we revert the feature.
+2. It makes doing semantic versioning a lot simpler. This makes it easier to see which packages will work or break with other combinations of packages.
+3. It is easier to colate a changes log. Probably not super important for a personal project, but this is something that will be important for larger projects that I want to learn for.
+
+The setup steps are fairly simple and listed on the [commitlint.js page](https://commitlint.js.org/guides/local-setup). Trying to commit with an invalid commit message is now rejected.
+
+![commit lint failure](./images/02-commitLintFailure.png)
+
+As you can see the commit also runs a test (which is successfully cached with Nx). This will help to catch errors earlier and I consider essential for working in [trunk based development](./00-assumptions.md#trunk-based-development).
+
+// TODO: getting github things setup (dependobot, CI), Nx Cloud
