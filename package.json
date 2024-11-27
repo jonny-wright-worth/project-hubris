@@ -2,7 +2,9 @@
   "name": "@hubris/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "nx run-many -t test"
+  },
   "private": true,
   "dependencies": {
     "next": "14.2.16",
