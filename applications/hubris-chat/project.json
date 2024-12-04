@@ -1,0 +1,9 @@
+{
+  "name": "hubris-chat",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "applications/hubris-chat/src",
+  "projectType": "application",
+  "tags": ["type:application", "scope:chat"],
+  "// targets": "to see all targets run: nx show project hubris-chat --web",
+  "targets": {}
+}
