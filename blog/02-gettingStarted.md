@@ -63,3 +63,24 @@ This makes a default hook to test on each commit.
 Running tests before each commit might not be exactly what I want - I can see arguments either way. On one hand, every commit should be a single piece of value that is individually deployable. On the other hand, sometimes you need to save some work in progress regardless if it is working or not.
 
 I add a `pre-push` file to the `.husky` directory with the content `npm run prepush` and add a `prepush` script to the main `package.json` file which just delegates to running `test`. This level of indirection to prepush just helps to communicate intent.
+
+### Conventional Commits
+
+Conventional commits is a framework on how to structure a git commit message. It has the structure `<type>[optional scope]: <description>` (e.g. `fix(core): ensure that Foos always set the Bars correctly`). It has a few benefits:
+
+1. It makes it simpler to scan the commit history. Every commit will have a lead description of whether is a feature, a fix, a test, documentation, etc, so scanning down the list of the commits it is easy to see what type of commit it is
+   - The bonus is that it helps us to make each commit atomic. Say you make some changes to a feature and in the process realise that some of the documentation is not up to date - and so update it. What do you write in the conventional commit? It is both a documentation and a feature commit. The difficulty in finding the right conventional commit helps us to realise that we should be making these as two separate commits. If there is a problem with the feature changes - say it includes a bug or regression - then we don't want to revert the documentation changes if we revert the feature.
+2. It makes doing semantic versioning a lot simpler. This makes it easier to see which packages will work or break with other combinations of packages.
+3. It is easier to colate a changes log. Probably not super important for a personal project, but this is something that will be important for larger projects that I want to learn for.
+
+The setup steps are fairly simple and listed on the [commitlint.js page](https://commitlint.js.org/guides/local-setup). Trying to commit with an invalid commit message is now rejected.
+
+```
+npm i commitlint @commitlint/config-conventional
+echo "npx --no -- commitlint --edit $1" > .husky/commit-msg
+echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.ts
+```
+
+![commit lint failure](./images/02-commitLintFailure.png)
+
+### Dependabot
