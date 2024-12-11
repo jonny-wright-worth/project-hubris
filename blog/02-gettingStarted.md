@@ -71,7 +71,7 @@ Conventional commits is a framework on how to structure a git commit message. It
 1. It makes it simpler to scan the commit history. Every commit will have a lead description of whether is a feature, a fix, a test, documentation, etc, so scanning down the list of the commits it is easy to see what type of commit it is
    - The bonus is that it helps us to make each commit atomic. Say you make some changes to a feature and in the process realise that some of the documentation is not up to date - and so update it. What do you write in the conventional commit? It is both a documentation and a feature commit. The difficulty in finding the right conventional commit helps us to realise that we should be making these as two separate commits. If there is a problem with the feature changes - say it includes a bug or regression - then we don't want to revert the documentation changes if we revert the feature.
 2. It makes doing semantic versioning a lot simpler. This makes it easier to see which packages will work or break with other combinations of packages.
-3. It is easier to colate a changes log. Probably not super important for a personal project, but this is something that will be important for larger projects that I want to learn for.
+3. It is easier to collate a changes log. Probably not super important for a personal project, but this is something that will be important for larger projects that I want to learn for.
 
 The setup steps are fairly simple and listed on the [commitlint.js page](https://commitlint.js.org/guides/local-setup). Trying to commit with an invalid commit message is now rejected.
 
@@ -83,4 +83,38 @@ echo "export default { extends: ['@commitlint/config-conventional'] };" > commit
 
 ![commit lint failure](./images/02-commitLintFailure.png)
 
-### Dependabot
+### Renovate
+
+I do not like having dependencies that are out of date, but I like updating dependencies even less. Wouldn't it be great if:
+
+1. There was a tool that could automatically update dependencies, and
+2. We could write good enough tests so that an automatic tool could tell us if an upgrade broke our dependencies?
+
+Well, good news: [Renovate](https://www.mend.io/renovate/) is a tool that does point 1, and we are in control of point 2. (Other tools are also available for point 1 - for example Dependabot, however Renovate is slightly more modern).
+
+The process for starting with Renovate is really simple: just go to the [GitHub App](https://github.com/apps/renovate), install the app and it will automatically set itself up and create a PR to create an initial configuration.
+
+![Renovate PR](./images/02-renovatePR.png)
+
+As well as some instructions about next steps, the PR description contains all the PRs it will make to update existing dependencies. As it has been a few weeks since I intially created the workspace there are 27 packages that it has identified it can update.
+
+Given that Renovate will raise a slew of PRs - once for every minor version update, I don't want to have a human in the loop for every one of these. It would easily become overwhelming. Instead I would like Renovate to check if a package upgrade is a minor version change or less, then run tests if so and automatically merge it if everything is good. I did consider including major version changes too, but I think I might like to see how this works in practice a bit before I try it.
+
+I add the following fragment into the `renovate.json` config file, overriding the default `automerge: false` config. Note that this also requires enabling the automerge setting within the Settings page of the GitHub repo.
+
+```
+  "packageRules": [
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "fast-forward"
+    },
+    {
+      "description": "Automerge dev dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "automergeStrategy": "fast-forward"
+    }
+  ],
+```
