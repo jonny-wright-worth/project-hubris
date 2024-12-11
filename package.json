@@ -5,7 +5,8 @@
   "scripts": {
     "prepare": "husky",
     "prepush": "npm run test",
-    "test": "nx run-many -t test"
+    "test": "nx run-many -t test",
+    "serve": "nx run-many -t serve"
   },
   "private": true,
   "devDependencies": {

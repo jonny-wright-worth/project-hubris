@@ -12,5 +12,22 @@ I want to take a look at what it takes to really build a modern, performant web 
 
 ## Posts
 
-- [Assumptions](blog/00-assumptions.md)
-- [What am I building?](blog/01-whatAmIBuilding.md)
+- [Assumptions](./blog/00-assumptions.md)
+- [What am I building?](./blog/01-whatAmIBuilding.md)
+- [Getting started](./blog/02-gettingStarted.md)
+
+## Quick start
+
+To start this project run:
+
+```
+npm i
+npm run serve
+```
+
+To test:
+
+```
+npm i
+npm run test
+```

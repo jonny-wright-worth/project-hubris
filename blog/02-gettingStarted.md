@@ -5,7 +5,7 @@ OK, enough background let's actually write some code. I ended last blog post ext
 To start I run
 
 ```
-npx create-nx-workspace project-hubris --packageManager=pnpm
+npx create-nx-workspace project-hubris
 ```
 
 I keep most of the default settings but selected empty project. I'll add libraries and applications manually. I opted to use GitHub as my build pipeline. I have heard great things about GitLabs, but I know almost nothing about it. Maybe it will be something to migrate to some point down the line. For now, GitHub Actions should be entirely sufficient.
@@ -118,3 +118,14 @@ I add the following fragment into the `renovate.json` config file, overriding th
     }
   ],
 ```
+
+# Summary
+
+So, what have we got and how does it relate to what I set out in [post 1](./01-whatAmIBuilding.md)?
+
+- We have a Nx based repository with a single web application. This will obviously need to be extended to resemble anything close to a 'real' web appication. But it sets the ground work for fast build and test cycle by leveraging Nx and its caching.
+- We have protected the `main` branch by enabling pre-push testing hooks. With tests being fast this should give us a good combination of speed and safety.
+  - There are some basic tests provided out-of-the-box from the Nx React template, but they will need expanding.
+- As of yet, there is no provision for architectual choices like DDD, Ports-and-Adaptors or Clean Architecture. I intend to add these as the scope expands.
+
+Overall, it seems like a good start, but still a long way off production ready. Part 3 will start to look at the domain and what functionality an app will need.
