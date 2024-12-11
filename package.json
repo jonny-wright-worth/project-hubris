@@ -23,7 +23,7 @@
     "@swc/core": "~1.10.0",
     "@swc/helpers": "~0.5.11",
     "@testing-library/react": "15.0.7",
-    "@types/node": "18.19.68",
+    "@types/node": "22.10.2",
     "@types/react": "18.3.16",
     "@types/react-dom": "18.3.5",
     "@types/react-is": "18.3.1",
