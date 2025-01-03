@@ -1,6 +1,6 @@
 # What am I building?
 
-So what am I building? For the purpose of exploring what it takes - it doesn't really matter - the concepts should for a lot of different domains. Obviously, there will be a places where this does not work (e.g. high-frequency trading, highly parallelised machine learning). For this example, I want to choose a domain that:
+So what am I building? For the purpose of exploring what it takes - it doesn't really matter - the concepts work should for a lot of different domains. Obviously, there will be a places where this does not work (e.g. high-frequency trading, highly parallelised machine learning). For this example, I want to choose a domain that:
 
 - is common enough for everyone to understand,
 - simple enough to not get in the way of exploring the goal - that is what does it take to build a web app from start to deployment
