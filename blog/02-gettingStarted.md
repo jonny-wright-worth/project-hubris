@@ -119,6 +119,14 @@ I add the following fragment into the `renovate.json` config file, overriding th
   ],
 ```
 
+#### One week later
+
+I found out the hard way that using Renovate to create PRs quickly chews through NxCloud credits. As mentioned above Renovate predicted that it had 27 packages to update. This resulted in 27 branches, which resulted in more cloud runs because merging in a change caused other branch builds to rebuild after the merge. Fortunately I am using a Hobby level plan on NxCloud and the worst that happened was that my cloud builds failed to start - I did not run up a massive bill.
+
+![Nx Credits usage](./images/02-nxCreditsUsage.png)
+
+If I do this again I will definitely be looking at the [branchConcurrentLimit](https://docs.renovatebot.com/configuration-options/#branchconcurrentlimit) setting to reduce how many dependencies Renovate will attempt to upgrade any any time, and [grouping](https://docs.renovatebot.com/configuration-options/#groupname) minor changes.
+
 # Summary
 
 So, what have we got and how does it relate to what I set out in [post 1](./01-whatAmIBuilding.md)?
