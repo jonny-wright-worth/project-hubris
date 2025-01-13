@@ -34,7 +34,7 @@
     "babel-plugin-styled-components": "2.1.4",
     "cypress": "^13.13.0",
     "eslint": "^9.8.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-cypress": "^4.0.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
